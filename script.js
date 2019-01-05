@@ -1,13 +1,19 @@
 const nbspReplacer = '<span style="color: white; background: #3ea093; padding: 4px 6px; border-radius: 4px;">&amp;nbsp;</span>';
 
 const showNBSPs = () => {
-  const html = document.getElementsByTagName('html')[0];
-  html.innerHTML = html.innerHTML.split('&nbsp;').join(nbspReplacer);
+  const elements = document.body.getElementsByTagName('*');
+  for (let i = 0; i < elements.length; i++) {
+    const newHTML = elements[i].innerHTML.split('&nbsp;').join(nbspReplacer);
+    if (elements[i].innerHTML !== newHTML) elements[i].innerHTML = newHTML;
+  }
 };
 
 const hideNBSPs = () => {
-  const html = document.getElementsByTagName('html')[0];
-  html.innerHTML = html.innerHTML.split(nbspReplacer).join('&nbsp;');
+  const elements = document.body.getElementsByTagName('*');
+  for (let i = 0; i < elements.length; i++) {
+    const newHTML = elements[i].innerHTML.split(nbspReplacer).join('&nbsp;');
+    if (elements[i].innerHTML !== newHTML) elements[i].innerHTML = newHTML;
+  }
 };
 
 chrome.runtime.onMessage.addListener((request) => {
